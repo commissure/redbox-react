@@ -1,0 +1,53 @@
+{
+  "name": "redbox-react",
+  "version": "1.0.0",
+  "description": "A redbox (rsod) component to display your uncaught errors.",
+  "main": "dist/redbox.js",
+  "scripts": {
+    "clean": "rimraf lib dist",
+    "build": "webpack src/index.js dist/redbox.js && NODE_ENV=production webpack src/index.js dist/redbox.min.js",
+    "lint": "standard && csslint ./src/redbox.css --quiet",
+    "prepublish": "npm run lint && npm run test && npm run clean && npm run build",
+    "test": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KeywordBrain/redbox-react.git"
+  },
+  "author": "David Pfahler <david@keywordbrain.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KeywordBrain/redbox-react/issues"
+  },
+  "homepage": "https://github.com/KeywordBrain/redbox-react",
+  "keywords": [
+    "redbox",
+    "rsod",
+    "react",
+    "react-native"
+  ],
+  "devDependencies": {
+    "babel": "^5.5.8",
+    "babel-core": "^5.6.18",
+    "babel-eslint": "^3.1.15",
+    "babel-loader": "^5.1.4",
+    "css-loader": "^0.15.5",
+    "csslint": "^0.10.0",
+    "csslint-loader": "^0.2.0",
+    "extract-text-webpack-plugin": "^0.8.2",
+    "rimraf": "^2.3.4",
+    "standard": "^5.0.0-2",
+    "style-loader": "^0.12.3",
+    "webpack": "^1.9.6",
+    "webpack-dev-server": "^1.8.2"
+  },
+  "peerDependencies": {
+    "react": ">=0.13.0 <0.15.0 || 0.14.0-beta1"
+  },
+  "dependencies": {
+    "error-stack-parser": "^1.2.0"
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  }
+}
