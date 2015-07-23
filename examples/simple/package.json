@@ -28,7 +28,7 @@
     "csslint": "^0.10.0",
     "csslint-loader": "^0.2.0",
     "node-libs-browser": "^0.5.2",
-    "react-hot-loader": "^1.2.7",
+    "react-hot-loader": "davidpfahler/react-hot-loader#error-reporter",
     "webpack": "^1.9.11",
     "webpack-dev-server": "^1.9.0",
     "webpack-error-notification": "^0.1.4"
