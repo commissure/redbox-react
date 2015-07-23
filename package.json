@@ -2,7 +2,10 @@
   "name": "redbox-react",
   "version": "1.0.0",
   "description": "A redbox (rsod) component to display your uncaught errors.",
-  "main": "dist/redbox.js",
+  "main": "index.js",
+  "browser":{
+    "index.js": "dist/redbox.js"
+  },
   "scripts": {
     "clean": "rimraf lib dist",
     "build": "webpack src/index.js dist/redbox.js && NODE_ENV=production webpack src/index.js dist/redbox.min.js",
