@@ -1,8 +1,21 @@
 'use strict'
 
+// imports
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
+// configurations
+var TEST, PROD, DEV
+if (process.env.TEST) {
+  TEST = true
+}
+else if (process.env.NODE_ENV === 'production') {
+  PROD = true
+} else {
+  DEV = true
+}
+
+// base set of plugins, used in any configuration
 var plugins = [
   new webpack.optimize.OccurenceOrderPlugin(),
   new webpack.DefinePlugin({
@@ -23,6 +36,9 @@ let config = {
       exclude: /node_modules/
     }]
   },
+  externals: {
+    'react': 'react'
+  },
   output: {
     library: 'redbox-react',
     libraryTarget: 'umd'
@@ -33,7 +49,21 @@ let config = {
   }
 }
 
-if (process.env.NODE_ENV === 'production') {
+// Mutates config to use the ExtractTextPlugin to extract
+// css instead of inlining it.
+function extractCSS (config) {
+  config.plugins.push(new ExtractTextPlugin('redbox.css', {allChunks: true}))
+
+  config.module.loaders.push({
+    test: /\.css?$/,
+    loader: ExtractTextPlugin.extract('css-loader?modules&localIdentName=[hash:base64:5]')
+  })
+}
+
+if (TEST) {
+  extractCSS(config)
+}
+else if (PROD) {
   config.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
@@ -42,12 +72,7 @@ if (process.env.NODE_ENV === 'production') {
       }
     })
   )
-  config.plugins.push(new ExtractTextPlugin('redbox.css', {allChunks: true}))
-
-  config.module.loaders.push({
-    test: /\.css?$/,
-    loader: ExtractTextPlugin.extract('css-loader?modules&localIdentName=[hash:base64:5]')
-  })
+  extractCSS(config)
 } else {
   config.module.loaders.push({
     test: /\.css?$/,

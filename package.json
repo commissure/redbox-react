@@ -3,15 +3,18 @@
   "version": "1.0.0",
   "description": "A redbox (rsod) component to display your uncaught errors.",
   "main": "index.js",
-  "browser":{
+  "browser": {
     "index.js": "dist/redbox.js"
   },
   "scripts": {
-    "clean": "rimraf lib dist",
-    "build": "webpack src/index.js dist/redbox.js && NODE_ENV=production webpack src/index.js dist/redbox.min.js",
-    "lint": "standard && csslint ./src/redbox.css --quiet",
+    "clean": "rimraf dist tmp",
+    "build:dev": "webpack src/index.js dist/redbox.js",
+    "build:prod": "NODE_ENV=production webpack src/index.js dist/redbox.min.js",
+    "build:test": "TEST=true webpack src/index.js tmp/redbox.js",
+    "build": "npm run build:dev && npm run build:prod",
+    "lint": "standard ./src && csslint ./src/redbox.css --quiet",
     "prepublish": "npm run lint && npm run test && npm run clean && npm run build",
-    "test": "npm run lint"
+    "test": "npm run lint -s && npm run build:test -s && babel-node ./tests | tap-spec"
   },
   "repository": {
     "type": "git",
@@ -41,6 +44,8 @@
     "rimraf": "^2.3.4",
     "standard": "^5.0.0-2",
     "style-loader": "^0.12.3",
+    "tap-spec": "^4.0.2",
+    "tape": "^4.0.1",
     "webpack": "^1.9.6",
     "webpack-dev-server": "^1.8.2"
   },
