@@ -1,0 +1,10 @@
+{
+  "stage": 0,
+  "optional": [
+    "runtime"
+  ],
+  "plugins": [
+    "react-hot",
+    "./error-catcher"
+  ]
+}
