@@ -5,14 +5,11 @@ var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 // configurations
-var TEST, PROD, DEV
+var TEST, PROD
 if (process.env.TEST) {
   TEST = true
-}
-else if (process.env.NODE_ENV === 'production') {
+} else if (process.env.NODE_ENV === 'production') {
   PROD = true
-} else {
-  DEV = true
 }
 
 // base set of plugins, used in any configuration
@@ -62,8 +59,7 @@ function extractCSS (config) {
 
 if (TEST) {
   extractCSS(config)
-}
-else if (PROD) {
+} else if (PROD) {
   config.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
