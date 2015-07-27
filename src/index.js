@@ -6,7 +6,7 @@ export default class RedBox extends Component {
   static propTypes = {
     error: PropTypes.instanceOf(Error).isRequired
   }
-  displayName: 'RedBox'
+  static displayName = 'RedBox'
   render () {
     const {error} = this.props
     const frames = ErrorStackParser.parse(error).map(f => {
