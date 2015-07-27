@@ -1,7 +1,7 @@
 {
-  "name": "library-boilerplate-example",
+  "name": "redbox-react-hot-loader-example",
   "version": "1.0.0",
-  "description": "library-boilerplate-example-description",
+  "description": "Use redbox-react with react-hot-loader",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
