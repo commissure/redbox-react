@@ -1,5 +1,15 @@
-.DS_Store
-*.log
-test
-examples
+# common
+
 coverage
+node_modules
+tmp
+*.log
+.DS_Store
+
+# npm specific
+
+.babelrc
+.csslintrc
+.gitignore
+.npmrc
+.travis.yml
