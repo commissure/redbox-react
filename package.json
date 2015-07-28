@@ -13,7 +13,7 @@
     "build:test": "TEST=true webpack src/index.js tmp/redbox.js",
     "build": "npm run build:dev && npm run build:prod",
     "lint": "standard ./src && csslint ./src/redbox.css --quiet",
-    "prepublish": "npm run lint && npm run test && npm run clean && npm run build",
+    "prepublish": "npm run clean && npm run build",
     "test": "npm run lint -s && npm run build:test -s && babel-node ./tests | tap-spec"
   },
   "repository": {
