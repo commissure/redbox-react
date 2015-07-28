@@ -1,6 +1,5 @@
 {
   "name": "redbox-react",
-  "version": "1.0.0",
   "description": "A redbox (rsod) component to display your uncaught errors.",
   "main": "index.js",
   "browser": {
@@ -14,7 +13,8 @@
     "build": "npm run build:dev && npm run build:prod",
     "lint": "standard ./src && csslint ./src/redbox.css --quiet",
     "prepublish": "npm run clean && npm run build",
-    "test": "npm run lint -s && npm run build:test -s && babel-node ./tests | tap-spec"
+    "test": "npm run lint -s && npm run build:test -s && babel-node ./tests | tap-spec",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
@@ -47,7 +47,8 @@
     "tap-spec": "^4.0.2",
     "tape": "^4.0.1",
     "webpack": "^1.9.6",
-    "webpack-dev-server": "^1.8.2"
+    "webpack-dev-server": "^1.8.2",
+    "semantic-release": "^4.0.0"
   },
   "peerDependencies": {
     "react": ">=0.13.0 <0.15.0 || 0.14.0-beta1"
