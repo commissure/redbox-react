@@ -1,4 +1,4 @@
 var catcherPath = 'babel-plugin-react-error-catcher'
-var reporterPath = catcherPath + '/reporters/same-size-reporter'
+var reporterPath = '../../../src/'
 
 module.exports = require(catcherPath)(reporterPath)
