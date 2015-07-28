@@ -8,7 +8,6 @@ tmp
 
 # npm specific
 
-.babelrc
 .csslintrc
 .gitignore
 .npmrc
