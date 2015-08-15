@@ -1,7 +1,7 @@
 {
   "name": "redbox-react",
   "description": "A redbox (rsod) component to display your errors.",
-  "main": "index.js",
+  "main": "dist/redbox.js",
   "browser": {
     "index.js": "dist/redbox.js"
   },
@@ -51,7 +51,7 @@
     "semantic-release": "^4.0.0"
   },
   "peerDependencies": {
-    "react": ">=0.13.0 <0.15.0 || 0.14.0-beta1"
+    "react": ">=0.13.2 || ^0.14.0-beta3"
   },
   "dependencies": {
     "error-stack-parser": "^1.2.0"
