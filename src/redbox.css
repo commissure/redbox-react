@@ -6,9 +6,12 @@
   padding: 10px;
   top: 0;
   bottom: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   background: rgb(204, 0, 0);
   color: white;
+  z-index: 99999;
 }
 
 .redbox .message {
