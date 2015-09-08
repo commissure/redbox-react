@@ -9,10 +9,10 @@ export default class RedBox extends Component {
   static displayName = 'RedBox'
   render () {
     const {error} = this.props
-    const frames = ErrorStackParser.parse(error).map(f => {
+    const frames = ErrorStackParser.parse(error).map((f, index) => {
       const link = `${f.fileName}:${f.lineNumber}:${f.columnNumber}`
       return (
-        <div className={frame}>
+        <div className={frame} key={index}>
           <div>{f.functionName}</div>
           <div className={file}>
             <a href={link}>{link}</a>
