@@ -1,5 +1,7 @@
 # redbox-react
 
+[![Build Status](https://travis-ci.org/KeywordBrain/redbox-react.svg?branch=master)](https://travis-ci.org/KeywordBrain/redbox-react)
+
 The red box (aka red screen of death) renders an error in this “pretty” format:
 
 <img src="http://i.imgur.com/9Jhlibk.png" alt="red screen of death" width="700" />
