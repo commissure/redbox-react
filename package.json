@@ -11,7 +11,7 @@
     "build:prod": "NODE_ENV=production webpack src/index.js dist/redbox.min.js",
     "build:test": "TEST=true webpack src/index.js tmp/redbox.js",
     "build": "npm run build:dev && npm run build:prod",
-    "lint": "standard ./src && csslint ./src/redbox.css --quiet",
+    "lint": "standard ./src",
     "prepublish": "npm run clean && npm run build",
     "test": "npm run lint -s && npm run build:test -s && babel-node ./tests | tap-spec",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
@@ -37,13 +37,8 @@
     "babel-core": "^5.6.18",
     "babel-eslint": "^3.1.15",
     "babel-loader": "^5.1.4",
-    "css-loader": "^0.15.5",
-    "csslint": "^0.10.0",
-    "csslint-loader": "^0.2.0",
-    "extract-text-webpack-plugin": "^0.8.2",
     "rimraf": "^2.3.4",
     "standard": "^5.0.0-2",
-    "style-loader": "^0.12.3",
     "tap-spec": "^4.0.2",
     "tape": "^4.0.1",
     "webpack": "^1.9.6",
@@ -51,7 +46,7 @@
     "semantic-release": "^4.0.0"
   },
   "peerDependencies": {
-    "react": ">=0.13.2 || ^0.14.0-beta3"
+    "react": ">=0.13.2 || ^0.14.0-rc1"
   },
   "dependencies": {
     "error-stack-parser": "^1.2.0"
