@@ -7,9 +7,9 @@
   },
   "scripts": {
     "clean": "rimraf dist tmp",
-    "build:dev": "webpack src/index.js dist/redbox.js",
-    "build:prod": "NODE_ENV=production webpack src/index.js dist/redbox.min.js",
-    "build:test": "TEST=true webpack src/index.js tmp/redbox.js",
+    "build:dev": "babel -e 0 src -d dist",
+    "build:prod": "NODE_ENV=production babel -e 0 src -d dist",
+    "build:test": "TEST=true babel -e 0 src -d tmp",
     "build": "npm run build:dev && npm run build:prod",
     "lint": "standard ./src",
     "prepublish": "npm run clean && npm run build",
@@ -41,8 +41,6 @@
     "standard": "^5.0.0-2",
     "tap-spec": "^4.0.2",
     "tape": "^4.0.1",
-    "webpack": "^1.9.6",
-    "webpack-dev-server": "^1.8.2",
     "semantic-release": "^4.0.0"
   },
   "peerDependencies": {
