@@ -2,7 +2,6 @@ export default {
   redbox: {
     boxSizing: 'border-box',
     fontFamily: 'sans-serif',
-    fontSize: '1em',
     position: 'fixed',
     padding: 10,
     top: 0,
@@ -12,7 +11,10 @@ export default {
     width: '100%',
     background: 'rgb(204, 0, 0)',
     color: 'white',
-    zIndex: 9999
+    zIndex: 9999,
+    textAlign: 'left',
+    fontSize: '16px',
+    lineHeight: 1.2
   },
   message: {
     fontWeight: 'bold'
