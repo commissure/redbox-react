@@ -3,12 +3,6 @@
 // imports
 var webpack = require('webpack')
 
-// configurations
-var PROD
-if (process.env.NODE_ENV === 'production') {
-  PROD = true
-}
-
 // base set of plugins, used in any configuration
 var plugins = [
   new webpack.optimize.OccurenceOrderPlugin(),
@@ -16,6 +10,18 @@ var plugins = [
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
   })
 ]
+
+// production configuration
+if (process.env.NODE_ENV === 'production') {
+  plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        screw_ie8: true,
+        warnings: false
+      }
+    })
+  )
+}
 
 let config = {
   module: {
@@ -26,27 +32,18 @@ let config = {
     }]
   },
   externals: {
-    'react': 'react'
+    'react': {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react'
+    }
   },
   output: {
-    library: 'redbox-react',
+    library: 'redbox',
     libraryTarget: 'umd'
   },
-  plugins: plugins,
-  resolve: {
-    extensions: ['', '.js']
-  }
-}
-
-if (PROD) {
-  config.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        screw_ie8: true,
-        warnings: false
-      }
-    })
-  )
+  plugins: plugins
 }
 
 module.exports = config
