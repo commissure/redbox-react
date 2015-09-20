@@ -1,6 +1,6 @@
 import test from 'tape'
 import {createComponent} from './utils'
-import RedBox from '../tmp/redbox'
+import RedBox from '../src'
 
 test('RedBox static displayName', t => {
   t.plan(1)

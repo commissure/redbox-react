@@ -1,19 +1,16 @@
 {
   "name": "redbox-react",
   "description": "A redbox (rsod) component to display your errors.",
-  "main": "dist/redbox.js",
-  "browser": {
-    "index.js": "dist/redbox.js"
-  },
+  "main": "lib/index.js",
   "scripts": {
-    "clean": "rimraf dist tmp",
-    "build:dev": "webpack src/index.js dist/redbox.js",
-    "build:prod": "NODE_ENV=production webpack src/index.js dist/redbox.min.js",
-    "build:test": "TEST=true webpack src/index.js tmp/redbox.js",
-    "build": "npm run build:dev && npm run build:prod",
+    "clean": "rimraf dist lib tmp",
+    "build:umd": "webpack src/index.js dist/redbox.js",
+    "build:umd:min": "NODE_ENV=production webpack src/index.js dist/redbox.min.js",
+    "build:lib": "NODE_ENV=production babel src --out-dir lib",
+    "build": "npm run build:umd && npm run build:umd:min && npm run build:lib",
     "lint": "standard ./src",
     "prepublish": "npm run clean && npm run build",
-    "test": "npm run lint -s && npm run build:test -s && babel-node ./tests | tap-spec",
+    "test": "npm run lint -s && babel-node ./tests | tap-spec",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
