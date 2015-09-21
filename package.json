@@ -5,8 +5,8 @@
   "scripts": {
     "clean": "rimraf dist lib tmp",
     "build:umd": "webpack src/index.js dist/redbox.js",
-    "build:umd:min": "NODE_ENV=production webpack src/index.js dist/redbox.min.js",
-    "build:lib": "NODE_ENV=production babel src --out-dir lib",
+    "build:umd:min": "webpack --config webpack.config.prod.js src/index.js dist/redbox.min.js",
+    "build:lib": "babel src --out-dir lib",
     "build": "npm run build:umd && npm run build:umd:min && npm run build:lib",
     "lint": "standard ./src",
     "prepublish": "npm run clean && npm run build",
