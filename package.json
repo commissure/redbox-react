@@ -46,7 +46,8 @@
     "react": ">=0.13.2 || ^0.14.0-rc1"
   },
   "dependencies": {
-    "error-stack-parser": "^1.2.0"
+    "error-stack-parser": "^1.2.0",
+    "object-assign": "^4.0.1"
   },
   "standard": {
     "parser": "babel-eslint"

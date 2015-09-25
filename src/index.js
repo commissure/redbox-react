@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import style from './style.js'
 import ErrorStackParser from 'error-stack-parser'
+import assign from 'object-assign'
 
 export default class RedBox extends Component {
   static propTypes = {
@@ -9,7 +10,7 @@ export default class RedBox extends Component {
   static displayName = 'RedBox'
   render () {
     const {error} = this.props
-    const {redbox, message, stack, frame, file, linkToFile} = Object.assign({}, style, this.props.style)
+    const {redbox, message, stack, frame, file, linkToFile} = assign({}, style, this.props.style)
 
     const frames = ErrorStackParser.parse(error).map((f, index) => {
       const link = `${f.fileName}:${f.lineNumber}:${f.columnNumber}`
