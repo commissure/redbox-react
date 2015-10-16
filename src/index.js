@@ -3,11 +3,11 @@ import style from './style.js'
 import ErrorStackParser from 'error-stack-parser'
 import assign from 'object-assign'
 
-export default class RedBox extends Component {
+export class RedBoxError extends Component {
   static propTypes = {
     error: PropTypes.instanceOf(Error).isRequired
   }
-  static displayName = 'RedBox'
+  static displayName = 'RedBoxError'
   render () {
     const {error} = this.props
     const {redbox, message, stack, frame, file, linkToFile} = assign({}, style, this.props.style)
@@ -31,3 +31,30 @@ export default class RedBox extends Component {
     )
   }
 }
+
+export default class RedBox extends Component {
+  static propTypes = {
+    error: PropTypes.instanceOf(Error).isRequired
+  }
+  static displayName = 'RedBox'
+  componentDidMount () {
+    this.el = document.createElement('div')
+    document.body.appendChild(this.el)
+    this.renderRedBoxError()
+  }
+  componentDidUpdate () {
+    this.renderRedBoxError()
+  }
+  componentWillUnmount () {
+    React.unmountComponentAtNode(this.el)
+    document.body.removeChild(this.el)
+    this.el = null
+  }
+  renderRedBoxError () {
+    React.render(<RedBoxError {...this.props}/>, this.el)
+  }
+  render () {
+    return null
+  }
+}
+
