@@ -42,12 +42,10 @@
     "webpack-dev-server": "^1.8.2",
     "semantic-release": "^4.0.0"
   },
-  "peerDependencies": {
-    "react": ">=0.13.2 || ^0.14.0-rc1"
-  },
   "dependencies": {
     "error-stack-parser": "^1.2.0",
-    "object-assign": "^4.0.1"
+    "object-assign": "^4.0.1",
+    "react": ">=0.13.2 || ^0.14.0"
   },
   "standard": {
     "parser": "babel-eslint"
