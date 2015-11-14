@@ -46,3 +46,23 @@ An error that's only in the console is only half the fun. Now you can use all th
 
 ## Will this catch errors for me?
 No. As you can see above, this is only a UI component for rendering errors and their stack traces. It's works great with other solutions, that automate the error catching for you, see the [examples](https://github.com/KeywordBrain/redbox-react/tree/master/examples).
+
+## Optional props
+
+`editorScheme` `[?string]` If a filename in the stack trace is local, the component can create the
+link to open your editor using this scheme eg: `subl` to create `subl://open?url=file:///filename`.
+
+`useLines` `[boolean=true]` Line numbers in the stack trace may be unreliable depending on the
+type of sourcemaps. You can choose to not display them with this flag.
+
+`useColumns` `[boolean=true]` Column numbers in the stack trace may be unreliable depending on the
+type of sourcemaps. You can choose to not display them with this flag.
+
+If using [react-transform-catch-errors](https://github.com/gaearon/react-transform-catch-errors#installation) you can add these options to your `.babelrc` through the [`imports` property](https://github.com/gaearon/react-transform-catch-errors#installation).
+
+## Sourcemaps with Webpack
+
+If using [Webpack](https://webpack.github.io) you can get accurate filenames in the stacktrace by
+setting the `output.devtoolModuleFilenameTemplate` settings to `/[absolute-resource-path]`.
+
+It's recommended to set `devtool` setting to `'eval'`.

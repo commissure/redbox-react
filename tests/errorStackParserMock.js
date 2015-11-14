@@ -1,5 +1,5 @@
-import framesStub from './framesStub.json'
-
-export default {
-  parse: () => framesStub
+export default (framesStub) => {
+  return {
+    parse: () => framesStub
+  }
 }
