@@ -7,9 +7,6 @@
     "start": "webpack-dev-server --hot --inline --port 3001"
   },
   "license": "MIT",
-  "dependencies": {
-    "react": "^0.14.1"
-  },
   "devDependencies": {
     "babel": "^5.8.3",
     "babel-loader": "^5.3.2",
