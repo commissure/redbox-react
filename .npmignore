@@ -1,6 +1,7 @@
 # common
 
 coverage
+examples
 node_modules
 tmp
 *.log
