@@ -1,10 +1,4 @@
 {
-  "stage": 0,
-  "optional": [
-    "runtime"
-  ],
-  "plugins": [
-    "react-hot",
-    "./error-catcher"
-  ]
+  "presets": ["es2015", "stage-0", "react"],
+  "plugins": ["react-hot", "./error-catcher", "transform-runtime"]
 }
