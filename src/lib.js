@@ -1,4 +1,4 @@
-export const filenameWithoutLoaders = (filename) => {
+export const filenameWithoutLoaders = (filename = '') => {
   var index = filename.lastIndexOf('!')
 
   return index < 0 ? filename : filename.substr(index + 1)

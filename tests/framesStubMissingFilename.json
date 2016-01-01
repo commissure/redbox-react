@@ -1,0 +1,13 @@
+[
+  {
+    "functionName": "App.render",
+    "fileName": "webpack:\/\/\/.\/components\/App.js?",
+    "lineNumber": 45,
+    "columnNumber": 12
+  },
+  {
+    "functionName": "App.render",
+    "lineNumber": 17,
+    "columnNumber": 41
+  }
+]

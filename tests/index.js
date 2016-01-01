@@ -4,6 +4,7 @@ import {createComponent} from './utils'
 import errorStackParserMock from './errorStackParserMock'
 import framesStub from './framesStub.json'
 import framesStubAbsoluteFilenames from './framesStubAbsoluteFilenames.json'
+import framesStubMissingFilename from './framesStubMissingFilename.json'
 import RedBox from '../src'
 import style from '../src/style'
 import './lib';
@@ -239,5 +240,35 @@ test('RedBox with absolute filenames but unreliable column numbers', t => {
       </div>
     </div>
   )
+  afterEach()
+})
+
+test('RedBox stack trace with missing filename', t => {
+  t.plan(1)
+  beforeEach(framesStubMissingFilename)
+  const error = new Error()
+  const component = createComponent(RedBox, {error})
+
+  const renderedStack = component
+    .props.children[1]
+
+  t.deepEqual(
+    renderedStack,
+    <div style={style.stack}>
+      <div style={style.frame} key={0}>
+        <div>App.render</div>
+        <div style={style.file}>
+          <a style={style.linkToFile} href="webpack:///./components/App.js?">webpack:///./components/App.js?:45:12</a>
+        </div>
+      </div>
+      <div style={style.frame} key={1}>
+        <div>App.render</div>
+        <div style={style.file}>
+          <a style={style.linkToFile} href="file://">{''}</a>
+        </div>
+      </div>
+    </div>
+  )
+
   afterEach()
 })
