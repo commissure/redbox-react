@@ -8,7 +8,7 @@ The red box (aka red screen of death) renders an error in this “pretty” form
 
 ## Usage
 Catch an error and give it to `redbox-react`. Works with
-* [react-transform-catch-errors](https://github.com/gaearon/react-transform-catch-errors) ([see example](https://github.com/KeywordBrain/redbox-react/tree/master/examples/react-transform-catch-errors) or [react-transform-boilderplate](https://github.com/gaearon/react-transform-boilerplate/))
+* [react-transform-catch-errors](https://github.com/gaearon/react-transform-catch-errors) ([see example](https://github.com/KeywordBrain/redbox-react/tree/master/examples/react-transform-catch-errors) or [react-transform-boilerplate](https://github.com/gaearon/react-transform-boilerplate/))
 * [babel-plugin-react-hot](https://github.com/loggur/babel-plugin-react-hot) & [babel-plugin-react-error-catcher](https://github.com/loggur/babel-plugin-react-error-catcher) (see [example](https://github.com/KeywordBrain/redbox-react/tree/master/examples/babel-plugin-react-hot))
 * [react-hot-loader](https://github.com/gaearon/react-hot-loader) (deprecated! see [example](https://github.com/KeywordBrain/redbox-react/tree/master/examples/react-hot-loader-example), relies on changes in unmerged [pull request](https://github.com/gaearon/react-hot-loader/pull/167) and will not be merged!)
 
