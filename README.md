@@ -25,6 +25,7 @@ Here is a more useful, full-fleged example:
 ```javascript
 /* global __DEV__ */
 import React from 'react'
+import { render } from 'react-dom'
 import App from './components/App'
 
 const root = document.getElementById('root')
@@ -32,12 +33,12 @@ const root = document.getElementById('root')
 if (__DEV__) {
   const RedBox = require('redbox-react')
   try {
-    React.render(<App />, root)
+    render(<App />, root)
   } catch (e) {
-    React.render(<RedBox error={e} />, root)
+    render(<RedBox error={e} />, root)
   }
 } else {
-  React.render(<App />, root)
+  render(<App />, root)
 }
 ```
 
