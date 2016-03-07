@@ -59,6 +59,9 @@ type of sourcemaps. You can choose to not display them with this flag.
 `useColumns` `[boolean=true]` Column numbers in the stack trace may be unreliable depending on the
 type of sourcemaps. You can choose to not display them with this flag.
 
+`style` `[?object]` Allows you to override the styles used when rendering the various parts of the
+component. It will be shallow-merged with the [default styles](./src/style.js).
+
 If using [react-transform-catch-errors](https://github.com/gaearon/react-transform-catch-errors#installation) you can add these options to your `.babelrc` through the [`imports` property](https://github.com/gaearon/react-transform-catch-errors#installation).
 
 ## Sourcemaps with Webpack

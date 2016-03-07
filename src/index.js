@@ -10,7 +10,8 @@ export default class RedBox extends Component {
     filename: PropTypes.string,
     editorScheme: PropTypes.string,
     useLines: PropTypes.bool,
-    useColumns: PropTypes.bool
+    useColumns: PropTypes.bool,
+    style: PropTypes.object,
   }
   static displayName = 'RedBox'
   static defaultProps = {
