@@ -18,11 +18,10 @@ export default class RedBox extends Component {
     useLines: true,
     useColumns: true
   }
-  render () {
-    const {error, filename, editorScheme, useLines, useColumns} = this.props
-    const {redbox, message, stack, frame, file, linkToFile} = assign({}, style, this.props.style)
-
-    const frames = ErrorStackParser.parse(error).map((f, index) => {
+  renderFrames (frames) {
+    const {filename, editorScheme, useLines, useColumns} = this.props
+    const {frame, file, linkToFile} = assign({}, style, this.props.style)
+    return frames.map((f, index) => {
       let text
       let url
 
@@ -45,6 +44,29 @@ export default class RedBox extends Component {
         </div>
       )
     })
+  }
+  render () {
+    const {error} = this.props
+    const {redbox, message, stack, frame} = assign({}, style, this.props.style)
+
+    let frames
+    let parseError
+    try {
+      frames = ErrorStackParser.parse(error)
+    } catch (e) {
+      parseError = new Error('Failed to parse stack trace. Stack trace information unavailable.')
+    }
+
+    if (parseError) {
+      frames = (
+        <div style={frame} key={0}>
+          <div>{parseError.message}</div>
+        </div>
+      )
+    } else {
+      frames = this.renderFrames(frames)
+    }
+
     return (
       <div style={redbox}>
         <div style={message}>{error.name}: {error.message}</div>
