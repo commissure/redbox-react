@@ -272,3 +272,44 @@ test('RedBox stack trace with missing filename', t => {
 
   afterEach()
 })
+
+test('RedBox with throwing stack trace parser', t => {
+  t.plan(1)
+  RedBox.__Rewire__('ErrorStackParser', {
+    parse: function () {
+      // This mimicks the former behavior of stacktracejs,
+      // see https://github.com/stacktracejs/stackframe/issues/11.
+      throw new TypeError("Line Number must be a Number")
+    }
+  })
+  const ERR_MESSAGE = "original error message"
+  const error = new TypeError(ERR_MESSAGE)
+  const component = createComponent(RedBox, {error})
+
+  const renderedError = component
+    .props.children[0]
+    .props.children
+  t.equal(
+    renderedError[0],
+    'TypeError',
+    'Main error message begins with error type of original error'
+  )
+  t.equal(
+    renderedError[2],
+    ERR_MESSAGE,
+    'Main error message ends with message originally supplied to error constructor.'
+  )
+  const renderedStack = component
+    .props.children[1]
+
+  t.deepEqual(
+    renderedStack,
+    <div style={style.stack}>
+      <div style={style.frame} key={0}>
+        <div>Failed to parse stack trace. Stack trace information unavailable.</div>
+      </div>
+    </div>
+  )
+
+  afterEach()
+})
