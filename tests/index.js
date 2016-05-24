@@ -274,7 +274,7 @@ test('RedBox stack trace with missing filename', t => {
 })
 
 test('RedBox with throwing stack trace parser', t => {
-  t.plan(1)
+  t.plan(3)
   RedBox.__Rewire__('ErrorStackParser', {
     parse: function () {
       // This mimicks the former behavior of stacktracejs,
