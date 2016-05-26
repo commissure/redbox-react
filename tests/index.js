@@ -5,36 +5,47 @@ import errorStackParserMock from './errorStackParserMock'
 import framesStub from './framesStub.json'
 import framesStubAbsoluteFilenames from './framesStubAbsoluteFilenames.json'
 import framesStubMissingFilename from './framesStubMissingFilename.json'
-import RedBox from '../src'
+import RedBox, {RedBoxError, __RewireAPI__} from '../src'
 import style from '../src/style'
 import './lib';
 
 
 const beforeEach = (framesStub) => {
-  RedBox.__Rewire__('ErrorStackParser', errorStackParserMock(framesStub))
+  __RewireAPI__.__Rewire__('ErrorStackParser', errorStackParserMock(framesStub))
 }
 
 const afterEach = () => {
-  RedBox.__ResetDependency__('ErrorStackParser')
+  __RewireAPI__.__ResetDependency__('ErrorStackParser')
 }
 
+// RedBox tests
 test('RedBox static displayName', t => {
   t.plan(1)
-  beforeEach(framesStub)
   t.equal(
     RedBox.displayName,
     'RedBox',
-    'correct static displayName property on class'
+    'correct static displayName property on class RedBox'
   )
-  afterEach()
 })
 
-test('RedBox error message', t => {
+// TODO: add missing new tests for RedBox "portal" component
+
+// RedBoxError tests
+test('RedBoxError static displayName', t => {
+  t.plan(1)
+  t.equal(
+    RedBoxError.displayName,
+    'RedBoxError',
+    'correct static displayName property on class RedBoxError'
+  )
+})
+
+test('RedBoxError error message', t => {
   t.plan(3)
   beforeEach(framesStub)
   const ERR_MESSAGE = 'funny error name'
   const error = new Error(ERR_MESSAGE)
-  const component = createComponent(RedBox, {error})
+  const component = createComponent(RedBoxError, {error})
   // renderedError = div.redbox > div.message > *
   const renderedError = component
     .props.children[0]
@@ -57,11 +68,11 @@ test('RedBox error message', t => {
   afterEach()
 })
 
-test('RedBox stack trace', t => {
+test('RedBoxError stack trace', t => {
   t.plan(1)
   beforeEach(framesStub)
   const error = new Error()
-  const component = createComponent(RedBox, {error})
+  const component = createComponent(RedBoxError, {error})
 
   const renderedStack = component
     .props.children[1]
@@ -87,12 +98,12 @@ test('RedBox stack trace', t => {
   afterEach()
 })
 
-test('RedBox with filename from react-transform-catch-errors', t => {
+test('RedBoxError with filename from react-transform-catch-errors', t => {
   t.plan(1)
   beforeEach(framesStub)
   const error = new Error()
   const filename = 'some-optional-webpack-loader!/filename'
-  const component = createComponent(RedBox, {error, filename})
+  const component = createComponent(RedBoxError, {error, filename})
 
   const renderedStack = component
     .props.children[1]
@@ -117,13 +128,13 @@ test('RedBox with filename from react-transform-catch-errors', t => {
   afterEach()
 })
 
-test('RedBox with filename and editorScheme', t => {
+test('RedBoxError with filename and editorScheme', t => {
   t.plan(1)
   beforeEach(framesStub)
   const error = new Error()
   const filename = 'some-optional-webpack-loader!/filename'
   const editorScheme = 'subl'
-  const component = createComponent(RedBox, {error, filename, editorScheme})
+  const component = createComponent(RedBoxError, {error, filename, editorScheme})
 
   const renderedStack = component
     .props.children[1]
@@ -148,13 +159,13 @@ test('RedBox with filename and editorScheme', t => {
   afterEach()
 })
 
-test('RedBox with absolute filenames', t => {
+test('RedBoxError with absolute filenames', t => {
   t.plan(1)
   beforeEach(framesStubAbsoluteFilenames)
   const error = new Error()
   const filename = 'some-optional-webpack-loader!/filename'
   const editorScheme = 'subl'
-  const component = createComponent(RedBox, {error, filename, editorScheme})
+  const component = createComponent(RedBoxError, {error, filename, editorScheme})
 
   const renderedStack = component
     .props.children[1]
@@ -179,14 +190,14 @@ test('RedBox with absolute filenames', t => {
   afterEach()
 })
 
-test('RedBox with absolute filenames but unreliable line numbers', t => {
+test('RedBoxError with absolute filenames but unreliable line numbers', t => {
   t.plan(1)
   beforeEach(framesStubAbsoluteFilenames)
   const error = new Error()
   const filename = 'some-optional-webpack-loader!/filename'
   const editorScheme = 'subl'
   const useLines = false
-  const component = createComponent(RedBox, {error, filename, editorScheme, useLines})
+  const component = createComponent(RedBoxError, {error, filename, editorScheme, useLines})
 
   const renderedStack = component
     .props.children[1]
@@ -211,14 +222,14 @@ test('RedBox with absolute filenames but unreliable line numbers', t => {
   afterEach()
 })
 
-test('RedBox with absolute filenames but unreliable column numbers', t => {
+test('RedBoxError with absolute filenames but unreliable column numbers', t => {
   t.plan(1)
   beforeEach(framesStubAbsoluteFilenames)
   const error = new Error()
   const filename = 'some-optional-webpack-loader!/filename'
   const editorScheme = 'subl'
   const useColumns = false
-  const component = createComponent(RedBox, {error, filename, editorScheme, useColumns})
+  const component = createComponent(RedBoxError, {error, filename, editorScheme, useColumns})
 
   const renderedStack = component
     .props.children[1]
@@ -243,11 +254,11 @@ test('RedBox with absolute filenames but unreliable column numbers', t => {
   afterEach()
 })
 
-test('RedBox stack trace with missing filename', t => {
+test('RedBoxError stack trace with missing filename', t => {
   t.plan(1)
   beforeEach(framesStubMissingFilename)
   const error = new Error()
-  const component = createComponent(RedBox, {error})
+  const component = createComponent(RedBoxError, {error})
 
   const renderedStack = component
     .props.children[1]
@@ -273,9 +284,9 @@ test('RedBox stack trace with missing filename', t => {
   afterEach()
 })
 
-test('RedBox with throwing stack trace parser', t => {
+test('RedBoxError with throwing stack trace parser', t => {
   t.plan(3)
-  RedBox.__Rewire__('ErrorStackParser', {
+  __RewireAPI__.__Rewire__('ErrorStackParser', {
     parse: function () {
       // This mimicks the former behavior of stacktracejs,
       // see https://github.com/stacktracejs/stackframe/issues/11.
@@ -284,7 +295,7 @@ test('RedBox with throwing stack trace parser', t => {
   })
   const ERR_MESSAGE = "original error message"
   const error = new TypeError(ERR_MESSAGE)
-  const component = createComponent(RedBox, {error})
+  const component = createComponent(RedBoxError, {error})
 
   const renderedError = component
     .props.children[0]
