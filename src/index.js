@@ -1,10 +1,11 @@
 import React, {Component, PropTypes} from 'react'
+import ReactDOM from 'react-dom'
 import style from './style.js'
 import ErrorStackParser from 'error-stack-parser'
 import assign from 'object-assign'
 import {isFilenameAbsolute, makeUrl, makeLinkText} from './lib'
 
-export default class RedBox extends Component {
+export class RedBoxError extends Component {
   static propTypes = {
     error: PropTypes.instanceOf(Error).isRequired,
     filename: PropTypes.string,
@@ -13,7 +14,7 @@ export default class RedBox extends Component {
     useColumns: PropTypes.bool,
     style: PropTypes.object,
   }
-  static displayName = 'RedBox'
+  static displayName = 'RedBoxError'
   static defaultProps = {
     useLines: true,
     useColumns: true
@@ -73,5 +74,33 @@ export default class RedBox extends Component {
         <div style={stack}>{frames}</div>
       </div>
     )
+  }
+}
+
+// "Portal" component for actual RedBoxError component to
+// render to (directly under body). Prevents bugs as in #27.
+export default class RedBox extends Component {
+  static propTypes = {
+    error: PropTypes.instanceOf(Error).isRequired
+  }
+  static displayName = 'RedBox'
+  componentDidMount () {
+    this.el = document.createElement('div')
+    document.body.appendChild(this.el)
+    this.renderRedBoxError()
+  }
+  componentDidUpdate () {
+    this.renderRedBoxError()
+  }
+  componentWillUnmount () {
+    React.unmountComponentAtNode(this.el)
+    document.body.removeChild(this.el)
+    this.el = null
+  }
+  renderRedBoxError () {
+    ReactDOM.render(<RedBoxError {...this.props}/>, this.el)
+  }
+  render () {
+    return null
   }
 }
