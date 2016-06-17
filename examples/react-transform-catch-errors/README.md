@@ -1,0 +1,2 @@
+# react-transform-catch-errors example
+[react-transform-catch](https://github.com/gaearon/react-transform-catch-errors) errors is deprectated, but for now, this examples shows you how to use `redbox-react` with it.
