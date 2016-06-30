@@ -93,7 +93,7 @@ export default class RedBox extends Component {
     this.renderRedBoxError()
   }
   componentWillUnmount () {
-    React.unmountComponentAtNode(this.el)
+    ReactDOM.unmountComponentAtNode(this.el)
     document.body.removeChild(this.el)
     this.el = null
   }
