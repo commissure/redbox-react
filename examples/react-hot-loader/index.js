@@ -9,10 +9,9 @@ render(<AppContainer errorReporter={Redbox}><App /></AppContainer>, root)
 
 if (module.hot) {
   module.hot.accept('./components/App', () => {
-    const NextApp = require('./components/App').default
     render(
       <AppContainer errorReporter={Redbox}>
-        <NextApp />
+        <App />
       </AppContainer>,
       root
     )
