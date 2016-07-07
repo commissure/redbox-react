@@ -3,6 +3,7 @@
 var webpack = require('webpack')
 
 module.exports = function(options){
+  var isProd = options.nodeEnv === 'production'
 
   // base set of plugins, used in any configuration
   var plugins = [
@@ -25,6 +26,7 @@ module.exports = function(options){
   }
 
   return {
+    devtool: isProd ? 'hidden-source-map' : 'eval',
     module: {
       loaders: [{
         test: /\.js$/,
