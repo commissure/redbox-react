@@ -32,7 +32,7 @@ import App from './components/App'
 const root = document.getElementById('root')
 
 if (__DEV__) {
-  const RedBox = require('redbox-react')
+  const RedBox = require('redbox-react').RedBoxError
   try {
     render(<App />, root)
   } catch (e) {
