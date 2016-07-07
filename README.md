@@ -16,7 +16,8 @@ Catch an error and give it to `redbox-react`. Works with
 or manually:
 
 ```javascript
-const RedBox = require('redbox-react')
+import RedBox from 'redbox-react'
+
 const e = new Error('boom')
 const box = <RedBox error={e} />
 ```
@@ -32,7 +33,7 @@ import App from './components/App'
 const root = document.getElementById('root')
 
 if (__DEV__) {
-  const RedBox = require('redbox-react').RedBoxError
+  const RedBox = require('redbox-react').default
   try {
     render(<App />, root)
   } catch (e) {
