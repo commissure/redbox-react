@@ -19,14 +19,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KeywordBrain/redbox-react.git"
+    "url": "git+https://github.com/commissure/redbox-react.git"
   },
-  "author": "David Pfahler <david@keywordbrain.com>",
+  "author": "David Pfahler",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/KeywordBrain/redbox-react/issues"
+    "url": "https://github.com/commissure/redbox-react/issues"
   },
-  "homepage": "https://github.com/KeywordBrain/redbox-react",
+  "homepage": "https://github.com/commissure/redbox-react",
   "keywords": [
     "redbox",
     "rsod",

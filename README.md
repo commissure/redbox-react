@@ -9,8 +9,8 @@ The red box (aka red screen of death) renders an error in this “pretty” form
 
 ## Usage
 Catch an error and give it to `redbox-react`. Works with
-* [react-transform-catch-errors](https://github.com/gaearon/react-transform-catch-errors) ([see example](https://github.com/KeywordBrain/redbox-react/tree/master/examples/react-transform-catch-errors) or [react-transform-boilerplate](https://github.com/gaearon/react-transform-boilerplate/))
-* [react-hot-loader](https://github.com/gaearon/react-hot-loader) (⚠️ based on 3.0.0-beta.2! This depends on ErrorBoundaries which will likely not land in react! You should probably not use this before 3.0.0 comes out; see [example](https://github.com/KeywordBrain/redbox-react/tree/master/examples/react-hot-loader))
+* [react-transform-catch-errors](https://github.com/gaearon/react-transform-catch-errors) ([see example](https://github.com/commissure/redbox-react/tree/master/examples/react-transform-catch-errors) or [react-transform-boilerplate](https://github.com/gaearon/react-transform-boilerplate/))
+* [react-hot-loader](https://github.com/gaearon/react-hot-loader) (⚠️ based on 3.0.0-beta.2! This depends on ErrorBoundaries which will likely not land in react! You should probably not use this before 3.0.0 comes out; see [example](https://github.com/commissure/redbox-react/tree/master/examples/react-hot-loader))
 
 or manually:
 
@@ -44,10 +44,11 @@ if (__DEV__) {
 ```
 
 ## What is this good for?
+
 An error that's only in the console is only half the fun. Now you can use all the wasted space where your app would be if it didn’t crash to display the error that made it crash. You should use this in development only.
 
 ## Will this catch errors for me?
-No. As you can see above, this is only a UI component for rendering errors and their stack traces. It's works great with other solutions, that automate the error catching for you, see the [examples](https://github.com/KeywordBrain/redbox-react/tree/master/examples).
+No. As you can see above, this is only a UI component for rendering errors and their stack traces. It's works great with other solutions, that automate the error catching for you, see the [examples](https://github.com/commissure/redbox-react/tree/master/examples).
 
 ## Optional props
 
