@@ -13,6 +13,7 @@ export class RedBoxError extends Component {
     useLines: PropTypes.bool,
     useColumns: PropTypes.bool,
     style: PropTypes.object,
+    className: PropTypes.string,
   }
   static displayName = 'RedBoxError'
   static defaultProps = {
@@ -47,7 +48,7 @@ export class RedBoxError extends Component {
     })
   }
   render () {
-    const {error} = this.props
+    const {error, className} = this.props
     const {redbox, message, stack, frame} = assign({}, style, this.props.style)
 
     let frames
@@ -69,7 +70,7 @@ export class RedBoxError extends Component {
     }
 
     return (
-      <div style={redbox}>
+      <div style={redbox} className={className}>
         <div style={message}>{error.name}: {error.message}</div>
         <div style={stack}>{frames}</div>
       </div>
