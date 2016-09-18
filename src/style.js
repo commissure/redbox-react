@@ -14,7 +14,8 @@ export default {
     zIndex: 9999,
     textAlign: 'left',
     fontSize: '16px',
-    lineHeight: 1.2
+    lineHeight: 1.2,
+    overflow: 'scroll'
   },
   message: {
     fontWeight: 'bold'
