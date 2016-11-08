@@ -11,7 +11,7 @@ export default {
     width: '100%',
     background: 'rgb(204, 0, 0)',
     color: 'white',
-    zIndex: 9999,
+    zIndex: 2147483647,
     textAlign: 'left',
     fontSize: '16px',
     lineHeight: 1.2,
