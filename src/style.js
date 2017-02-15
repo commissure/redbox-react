@@ -15,7 +15,7 @@ export default {
     textAlign: 'left',
     fontSize: '16px',
     lineHeight: 1.2,
-    overflow: 'scroll'
+    overflow: 'auto'
   },
   message: {
     fontWeight: 'bold'
