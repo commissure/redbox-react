@@ -2,10 +2,12 @@
   "name": "redbox-react",
   "description": "A redbox (rsod) component to display your errors.",
   "main": "lib/index.js",
+  "types": "types/redbox-react.d.ts",
   "files": [
     "dist",
     "lib",
-    "src"
+    "src",
+    "types"
   ],
   "scripts": {
     "clean": "rimraf dist lib tmp",
