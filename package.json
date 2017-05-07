@@ -2,10 +2,12 @@
   "name": "redbox-react",
   "description": "A redbox (rsod) component to display your errors.",
   "main": "lib/index.js",
+  "types": "types/redbox-react.d.ts",
   "files": [
     "dist",
     "lib",
-    "src"
+    "src",
+    "types"
   ],
   "scripts": {
     "clean": "rimraf dist lib tmp",
@@ -14,7 +16,7 @@
     "build:lib": "babel src --out-dir lib",
     "build": "npm run build:umd && npm run build:umd:min && npm run build:lib",
     "prepublish": "npm run clean && npm run build",
-    "test": "standard ./src && babel-node ./tests | tap-spec",
+    "test": "standard ./src && babel-node ./tests | tap-spec && tsc --project ./types",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
@@ -34,6 +36,7 @@
     "react-native"
   ],
   "devDependencies": {
+    "@types/react": "^15.0.24",
     "babel-cli": "^6.9.0",
     "babel-core": "^6.9.0",
     "babel-loader": "^6.2.4",
@@ -49,6 +52,7 @@
     "standard": "^7.1.1",
     "tap-spec": "^4.0.2",
     "tape": "^4.5.1",
+    "typescript": "^2.3.2",
     "webpack": "^1.13.1"
   },
   "peerDependencies": {
