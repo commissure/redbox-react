@@ -5,6 +5,7 @@ import style from './style.js'
 import ErrorStackParser from 'error-stack-parser'
 import assign from 'object-assign'
 import {isFilenameAbsolute, makeUrl, makeLinkText} from './lib'
+import { mapStackTrace } from 'sourcemapped-stacktrace'
 
 export class RedBoxError extends Component {
   static propTypes = {
@@ -21,6 +22,26 @@ export class RedBoxError extends Component {
     useLines: true,
     useColumns: true
   }
+
+  state = {}
+
+  constructor(props) {
+    super(props)
+    this.mapError(props.error)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.mapError(nextProps.error)
+  }
+
+  mapError(error) {
+    mapStackTrace(error.stack, mappedStack => {
+      const mappedError = error;
+      mappedError.stack = mappedStack.join('\n');
+      this.setState({ error: mappedError });
+    });
+  }
+
   renderFrames (frames) {
     const {filename, editorScheme, useLines, useColumns} = this.props
     const {frame, file, linkToFile} = assign({}, style, this.props.style)
@@ -48,8 +69,13 @@ export class RedBoxError extends Component {
       )
     })
   }
+
   render () {
-    const {error, className} = this.props
+    const {error} = this.state
+    if (!error)
+      return null
+
+    const {className} = this.props
     const {redbox, message, stack, frame} = assign({}, style, this.props.style)
 
     let frames
