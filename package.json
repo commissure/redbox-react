@@ -16,6 +16,7 @@
     "build:lib": "babel src --out-dir lib",
     "build": "npm run build:umd && npm run build:umd:min && npm run build:lib",
     "prepublish": "npm run clean && npm run build",
+    "start": "babel src --out-dir lib -w",
     "test": "standard ./src && babel-node ./tests | tap-spec && tsc --project ./types",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
