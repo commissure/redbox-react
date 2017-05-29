@@ -1,6 +1,11 @@
 {
-  "presets": ["es2015", "stage-0", "react"],
+  "presets": ["env", "react"],
   "plugins": [
-    "rewire"
+    "rewire",
+    "transform-async-generator-functions",
+    "transform-class-properties",
+    "transform-do-expressions",
+    "transform-export-extensions",
+    "transform-object-rest-spread"
   ]
 }
