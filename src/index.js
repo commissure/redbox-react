@@ -23,6 +23,7 @@ export class RedBoxError extends Component {
     useColumns: true
   }
 
+  // State is used to store the error mapped to the source map.
   state = {}
 
   constructor(props) {
@@ -72,6 +73,8 @@ export class RedBoxError extends Component {
   }
 
   render () {
+    // The error is received as a property and after it gets mapped to the source
+    // map, it’ll be stored in the state.
     const {error} = this.state
     if (!error)
       return null
