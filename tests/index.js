@@ -11,8 +11,12 @@ import './lib';
 
 // There’s no DOM available during the tests and the error stack is just a stub
 // that don’t need to be mapped.
+RedBoxError.prototype.mapOnConstruction = function(error) {
+  this.state = { error, mapped: true }
+}
+
 RedBoxError.prototype.mapError = function(error) {
-  this.state = { error }
+  this.setState({ error, mapped: true })
 }
 
 const beforeEach = (framesStub) => {
