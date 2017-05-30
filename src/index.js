@@ -28,20 +28,47 @@ export class RedBoxError extends Component {
 
   constructor(props) {
     super(props)
-    this.mapError(props.error)
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.mapError(nextProps.error)
+  componentDidMount() {
+    this.mapError(this.props.error)
   }
 
-  mapError(error) {
-    mapStackTrace(error.stack, mappedStack => {
-      const mappedError = error;
-      mappedError.stack = mappedStack.join('\n')
-        .replace(/webpack:\/{3}/g, 'webpack:///.')
-      this.setState({ error: mappedError })
-    });
+  mapError(error, asyncStateUpdate) {
+    const stackLines = error.stack.split('\n')
+
+    // Using the “eval” setting on webpack already gives the correct location.
+    const isWebpackEval = stackLines[1].search(/\(webpack:\/{3}/) !== -1
+    if (isWebpackEval) {
+      // No changes are needed here.
+      this.setState({ error })
+      return
+    }
+
+    // Other eval follow a specific pattern and can be easily parsed.
+    const isEval = stackLines[1].search(/\(eval at/) !== -1
+
+    // Source maps that needs to be loaded.
+    if (!isEval) {
+      mapStackTrace(error.stack, mappedStack => {
+        const mappedError = error;
+        mappedError.stack = mappedStack.join('\n')
+        this.setState({ error: mappedError })
+      });
+      return
+    }
+
+    // The first line is the error message.
+    let fixedLines = [stackLines.shift()]
+    // The rest needs to be fixed.
+    for (let stackLine of stackLines) {
+      let [, atSomething, file, rowColumn] = stackLine.match(
+        /(.+)\(eval at (.+) \(.+?\), .+(\:[0-9]+\:[0-9]+)\)/
+      )
+      fixedLines.push(`${atSomething} (${file}${rowColumn})`)
+    }
+    error.stack = fixedLines.join('\n')
+    this.setState({ error })
   }
 
   renderFrames (frames) {
