@@ -9,6 +9,11 @@ import RedBox, {RedBoxError, __RewireAPI__} from '../src'
 import style from '../src/style'
 import './lib';
 
+// There’s no DOM available during the tests and the error stack is just a stub
+// that don’t need to be mapped.
+RedBoxError.prototype.mapError = function(error) {
+  this.state = { error }
+}
 
 const beforeEach = (framesStub) => {
   __RewireAPI__.__Rewire__('ErrorStackParser', errorStackParserMock(framesStub))
