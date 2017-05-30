@@ -35,6 +35,7 @@ export class RedBoxError extends Component {
   }
 
   mapError(error, asyncStateUpdate) {
+  mapError(error) {
     const stackLines = error.stack.split('\n')
 
     // Using the “eval” setting on webpack already gives the correct location.
