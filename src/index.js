@@ -24,40 +24,38 @@ export class RedBoxError extends Component {
   }
 
   // State is used to store the error mapped to the source map.
-  state = {}
+  state = {
+    error: null,
+    mapped: false
+  }
 
   constructor(props) {
     super(props)
+    this.mapOnConstruction(props.error)
   }
 
   componentDidMount() {
-    this.mapError(this.props.error)
+    if (!this.state.mapped)
+      this.mapError(this.props.error)
   }
 
-  mapError(error, asyncStateUpdate) {
-  mapError(error) {
+  // Try to map the error when the component gets constructed, this is possible
+  // in some cases like evals.
+  mapOnConstruction(error) {
     const stackLines = error.stack.split('\n')
 
     // Using the “eval” setting on webpack already gives the correct location.
     const isWebpackEval = stackLines[1].search(/\(webpack:\/{3}/) !== -1
     if (isWebpackEval) {
       // No changes are needed here.
-      this.setState({ error })
+      this.state = { error, mapped: true }
       return
     }
 
     // Other eval follow a specific pattern and can be easily parsed.
     const isEval = stackLines[1].search(/\(eval at/) !== -1
-
-    // Source maps that needs to be loaded.
-    if (!isEval) {
-      mapStackTrace(error.stack, mappedStack => {
-        const mappedError = error;
-        mappedError.stack = mappedStack.join('\n')
-        this.setState({ error: mappedError })
-      });
+    if (!isEval)
       return
-    }
 
     // The first line is the error message.
     let fixedLines = [stackLines.shift()]
@@ -69,7 +67,14 @@ export class RedBoxError extends Component {
       fixedLines.push(`${atSomething} (${file}${rowColumn})`)
     }
     error.stack = fixedLines.join('\n')
-    this.setState({ error })
+    this.state = { error, mapped: true }
+  }
+
+  mapError(error) {
+    mapStackTrace(error.stack, mappedStack => {
+      error.stack = mappedStack.join('\n')
+      this.setState({ error, mapped: true })
+    });
   }
 
   renderFrames (frames) {
@@ -103,8 +108,8 @@ export class RedBoxError extends Component {
   render () {
     // The error is received as a property and after it gets mapped to the source
     // map, it’ll be stored in the state.
-    const {error} = this.state
-    if (!error)
+    const {error, mapped} = this.state
+    if (!mapped)
       return null
 
     const {className} = this.props
