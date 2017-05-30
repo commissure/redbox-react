@@ -37,8 +37,9 @@ export class RedBoxError extends Component {
   mapError(error) {
     mapStackTrace(error.stack, mappedStack => {
       const mappedError = error;
-      mappedError.stack = mappedStack.join('\n');
-      this.setState({ error: mappedError });
+      mappedError.stack = mappedStack.join('\n')
+        .replace(/webpack:\/{3}/g, 'webpack:///.')
+      this.setState({ error: mappedError })
     });
   }
 
