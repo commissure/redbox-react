@@ -61,10 +61,16 @@ export class RedBoxError extends Component {
     let fixedLines = [stackLines.shift()]
     // The rest needs to be fixed.
     for (let stackLine of stackLines) {
-      let [, atSomething, file, rowColumn] = stackLine.match(
+      const evalStackLine = stackLine.match(
         /(.+)\(eval at (.+) \(.+?\), .+(\:[0-9]+\:[0-9]+)\)/
       )
-      fixedLines.push(`${atSomething} (${file}${rowColumn})`)
+      if (evalStackLine) {
+        const [, atSomething, file, rowColumn] = evalStackLine
+        fixedLines.push(`${atSomething} (${file}${rowColumn})`)
+      } else {
+        // TODO: When stack frames of different types are detected, try to load the additional source maps
+        fixedLines.push(stackLine)
+      }
     }
     error.stack = fixedLines.join('\n')
     this.state = { error, mapped: true }
