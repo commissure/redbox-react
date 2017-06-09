@@ -54,8 +54,11 @@ export class RedBoxError extends Component {
 
     // Other eval follow a specific pattern and can be easily parsed.
     const isEval = stackLines[1].search(/\(eval at/) !== -1
-    if (!isEval)
+    if (!isEval) {
+      // mapping will be deferred until `componentDidMount`
+      this.state = { error, mapped: false }
       return
+    }
 
     // The first line is the error message.
     let fixedLines = [stackLines.shift()]
@@ -112,11 +115,9 @@ export class RedBoxError extends Component {
   }
 
   render () {
-    // The error is received as a property and after it gets mapped to the source
-    // map, it’ll be stored in the state.
-    const {error, mapped} = this.state
-    if (!mapped)
-      return null
+    // The error is received as a property to initialize state.error, which may
+    // be updated when it is mapped to the source map.
+    const {error} = this.state
 
     const {className} = this.props
     const {redbox, message, stack, frame} = assign({}, style, this.props.style)
