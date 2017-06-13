@@ -44,6 +44,12 @@ export class RedBoxError extends Component {
   mapOnConstruction(error) {
     const stackLines = error.stack.split('\n')
 
+    // There's no stack, only the error message.
+    if (stackLines.length < 2) {
+      this.state = { error, mapped: true }
+      return
+    }
+
     // Using the “eval” setting on webpack already gives the correct location.
     const isWebpackEval = stackLines[1].search(/\(webpack:\/{3}/) !== -1
     if (isWebpackEval) {
