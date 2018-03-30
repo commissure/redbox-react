@@ -9,6 +9,7 @@
     "src",
     "types"
   ],
+  "types": "./types/redbox-react.d.ts",
   "scripts": {
     "clean": "rimraf dist lib tmp",
     "build:umd": "webpack src/index.js dist/redbox.js",
