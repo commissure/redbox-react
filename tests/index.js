@@ -168,6 +168,37 @@ test('RedBoxError with filename and editorScheme', t => {
   afterEach()
 })
 
+test('RedBoxError with filename and vscode like editorScheme', t => {
+  t.plan(1)
+  beforeEach(framesStub)
+  const error = new Error()
+  const filename = 'some-optional-webpack-loader!/filename'
+  const editorScheme = 'vscode'
+  const component = createComponent(RedBoxError, {error, filename, editorScheme})
+
+  const renderedStack = component
+    .props.children[1]
+
+  t.deepEqual(
+    renderedStack,
+    <div style={style.stack}>
+      <div style={style.frame} key={0}>
+        <div>App.render</div>
+        <div style={style.file}>
+          <a style={style.linkToFile} href="vscode://file/filename">/filename</a>
+        </div>
+      </div>
+      <div style={style.frame} key={1}>
+        <div>App.render</div>
+        <div style={style.file}>
+          <a style={style.linkToFile} href="webpack:///./~/react-hot-loader/~/react-hot-api/modules/makeAssimilatePrototype.js?">webpack:///./~/react-hot-loader/~/react-hot-api/modules/makeAssimilatePrototype.js?:17:41</a>
+        </div>
+      </div>
+    </div>
+  )
+  afterEach()
+})
+
 test('RedBoxError with absolute filenames', t => {
   t.plan(1)
   beforeEach(framesStubAbsoluteFilenames)

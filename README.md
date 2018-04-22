@@ -80,8 +80,11 @@ customize its behaviour:
 
 ### `editorScheme` `[?string]`
 If a filename in the stack trace is local, the component can create the
-link to open your editor using this scheme eg: `subl` to create
-`subl://open?url=file:///filename`.
+link to open your editor using this scheme eg:
+  - `subl` to create
+    `subl://open?url=file:///filename`.
+  - or `vscode` to create
+    `vscode://file/filename`.
 
 ### `useLines` `[boolean=true]`
 Line numbers in the stack trace may be unreliable depending on the
