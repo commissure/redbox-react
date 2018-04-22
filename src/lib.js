@@ -33,7 +33,17 @@ export const makeUrl = (filename, scheme, line, column) => {
 
   let url = `file://${actualFilename}`
 
-  if (scheme) {
+  if (scheme === 'vscode') {
+    url = `${scheme}://file/${url}`
+    url = url.replace(/file:\/\/\//, '') // visual studio code does not need file:/// in its scheme
+    if (line && actualFilename === filename) {
+      url = `${url}:${line}`
+
+      if (column) {
+        url = `${url}:${column}`
+      }
+    }
+  } else if (scheme) {
     url = `${scheme}://open?url=${url}`
 
     if (line && actualFilename === filename) {
