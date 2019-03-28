@@ -7,7 +7,14 @@ export interface RedBoxProps extends React.Props<RedBoxError> {
   editorScheme?: string
   useLines?: boolean
   useColumns?: boolean
-  style?: React.CSSProperties
+  style?: {
+    redbox?: React.CSSProperties;
+    message?: React.CSSProperties;
+    stack?: React.CSSProperties;
+    frame?: React.CSSProperties;
+    file?: React.CSSProperties;
+    linkToFile?: React.CSSProperties;
+  };
   className?: string
 }
 
